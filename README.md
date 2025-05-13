@@ -6,6 +6,7 @@ A simple countdown timer to check how many days are left until the release of **
 - A countdown timer displaying the days remaining until GTA VI is released.
 - Simple animations with Tailwind CSS to give a clean and minimal look.
 - Inspired by the official GTA VI website, but with a focus on simplicity and performance.
+- Built with a responsive, mobile-first approach.
   
 ### Tech Stack:
 - **HTML**
