@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./gta-vi-logo.ico" type="image/x-icon" />
+    <title>GTA VI Countdown</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Orbitron font setup -->
+    <style>
+      body {
+        font-family: 'Orbitron', sans-serif;
+       
+      }
+    </style>
+  </head>
+  <body class="bg-black text-white flex flex-col items-center text-center">
+    <!-- Header -->
+    <header class="w-full p-4">
+      <nav class="flex items-center justify-between max-w-5xl mx-auto w-full">
+        <img src="./minimalist.svg" alt="Logo" class=" md:block h-16" />
+        <img src="text.webp" alt="Game Name" class="hidden sm:block h-[100px] pl-19 pr-10 object-fill" />
+        <img id="hamburger" src="hamba.svg" alt="Menu" class="block h-10 cursor-pointer" />
+
+      </nav>
+    </header>
+    <!-- Sidebar Menu -->
+
+<div id="menu" class="fixed top-0 left-0 h-full bg-black transform transition-transform duration-300 z-50 overflow-hidden text-left shadow-lg shadow-[#f3b36a]" style="width: 0; transform: translateX(-100%);">
+  <div class="flex flex-col h-full px-6 pt-6 gap-6">
+    <button id="closeBtn" class="text-white text-7xl self-end mb-4">&times;</button>
+    <a href="https://gtavilaunch.vercel.app/" class=" text-2xl hover:text-[#f3b36a] transition-all">Home</a>
+    <a href="https://youtu.be/VQRLujxTm3c?feature=shared" class=" text-2xl hover:text-[#f3b36a]  transition-all">Trailer</a>
+    <a href="https://www.rockstargames.com/VI" target="_blank" class=" text-2xl hover:text-[#f3b36a] transition-all">Official Site</a>
+    <a href="https://github.com/pranavkhaspa" target="_blank" class=" text-2xl hover:text-[#f3b36a] transition-all">My GitHub</a>
+  </div>
+</div>
+
+
+
+
+    <!-- Center Content -->
+    <div class="mt-16">
+      <img
+        src="./gta-vi-logo.ico"
+        alt="GTA VI Logo"
+        class="max-w-[200px] mx-auto mb-6"
+      />
+      <div class="text-3xl md:text-4xl font-bold text-[#f3b36a]">
+        COMING <br />MAY 26<br />2026
+      </div>
+      <div class="mt-4 flex justify-center gap-6">
+        <!-- <img src="ps5-logo.png" alt="PS5" class="h-6 opacity-80" />
+        <img src="xbox-logo.png" alt="Xbox" class="h-6 opacity-80" /> -->
+        <p class="text-sm text-gray-500 " >PS5</p>
+        <P class="text-sm text-gray-500 " >xbox</P>
+      </div>
+    </div>
+
+    <!-- Countdown Clock -->
+    <div
+      class="clock flex flex-wrap justify-center gap-4 mt-10 text-white"
+      id="clock"
+    >
+      <div>
+        <div class="bg-[#111] px-4 py-5 text-3xl rounded-lg w-20 shadow-inner shadow-white" id="days">00</div>
+        <div class="text-sm text-gray-400 mt-2">DAYS</div>
+      </div>
+      <div>
+        <div class="bg-[#111] px-4 py-5 text-3xl rounded-lg w-20 shadow-inner shadow-white" id="hours">00</div>
+        <div class="text-sm text-gray-400 mt-2">HOURS</div>
+      </div>
+      <div>
+        <div class="bg-[#111] px-4 py-5 text-3xl rounded-lg w-20 shadow-inner shadow-white" id="minutes">00</div>
+        <div class="text-sm text-gray-400 mt-2">MINUTES</div>
+      </div>
+      <div>
+        <div class="bg-[#111] px-4 py-5 text-3xl rounded-lg w-20 shadow-inner shadow-white" id="seconds">00</div>
+        <div class="text-sm text-gray-400 mt-2">SECONDS</div>
+      </div>
+    </div>
+
+    <!-- Countdown Script -->
+    <script>
+      const endDate = new Date("May 26, 2026 00:00:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate - now;
+
+        if (distance < 0) {
+          document.getElementById("clock").innerHTML =
+            "<h2 class='text-2xl mt-6 text-green-400'>It's Time!</h2>";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
+
+        document.getElementById("days").textContent = String(days).padStart(2, '0');
+        document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+  const closeBtn = document.getElementById("closeBtn");
+
+  function openMenu() {
+    const rect = hamburger.getBoundingClientRect();
+    const menuWidth = rect.right + 10; // match to hamburger's right edge
+    menu.style.width = `${menuWidth}px`;
+    menu.style.transform = "translateX(0)";
+  }
+
+  function closeMenu() {
+    menu.style.transform = "translateX(-100%)";
+    // Optional: wait for transition, then reset width (optional UX)
+    setTimeout(() => {
+      menu.style.width = "0";
+    }, 300);
+  }
+
+  hamburger.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+</script>
+
+
+
+  </body>
+</html>
